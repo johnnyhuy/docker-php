@@ -2,10 +2,10 @@
 FROM alpine:latest
 
 # Details.
-LABEL com.johnnyhuy.version="1.0.0"
+LABEL com.johnnyhuy.version="1.1.0"
 LABEL com.johnnyhuy.author="Johnny Huynh"
 LABEL com.johnnyhuy.author-email="info@johnnyhuy.com"
-LABEL com.johnnyhuy.release-date="2017-12-07"
+LABEL com.johnnyhuy.release-date="2017-12-08"
 
 # Environment variables.
 ENV TIMEZONE            Australia/Melbourne
@@ -19,8 +19,8 @@ RUN apk update && apk upgrade
 
 # PHP.
 RUN \
-    echo -e "\nInstalling PHP 7..." && \
-    apk add --update \
+    echo -e "\nInstalling PHP 7..." \
+    && apk add --update \
     php7-bcmath \
     php7-bz2 \
     php7-ctype \
@@ -52,17 +52,16 @@ RUN \
     php7-xmlrpc \
     php7-xmlwriter \
     php7-zip \
-    php7-zlib && \
-    sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
-    sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
-    sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini && \
-    sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|i" /etc/php7/php.ini && \
-    sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php7/php.ini && \
-    sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.ini && \
-    sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini && \
-    mkdir -p /var/www
+    php7-zlib \
+    && sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf \
+    && sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini \
+    && sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini \
+    && sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|i" /etc/php7/php.ini \
+    && sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php7/php.ini \
+    && sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.ini \
+    && sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini
 
 RUN \
     echo -e "\nInstalling misc packages..." && \
@@ -72,10 +71,10 @@ RUN \
 
 # Clear cache.
 RUN \
-    echo -e "\nCleaning up temporary files..." && \
-    apk del tzdata && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
+    echo -e "\nCleaning up temporary files..." \
+    && apk del tzdata \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/*
 
 # Set work directory.
 WORKDIR /var/www

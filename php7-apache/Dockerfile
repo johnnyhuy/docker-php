@@ -2,10 +2,10 @@
 FROM alpine:latest
 
 # Details.
-LABEL com.johnnyhuy.version="1.0.0"
+LABEL com.johnnyhuy.version="1.1.0"
 LABEL com.johnnyhuy.author="Johnny Huynh"
 LABEL com.johnnyhuy.author-email="info@johnnyhuy.com"
-LABEL com.johnnyhuy.release-date="2017-12-07"
+LABEL com.johnnyhuy.release-date="2017-12-08"
 
 # Environment variables.
 ENV TIMEZONE            Australia/Melbourne
@@ -19,63 +19,63 @@ RUN apk update && apk upgrade
 
 # PHP.
 RUN \
-    echo -e "\nInstalling PHP 7..." && \
-    apk add --update \
-    php7-bcmath \
-    php7-bz2 \
-    php7-ctype \
-    php7-curl \
-    php7-dom \
-    php7-fpm \
-    php7-gd \
-    php7-gettext \
-    php7-gmp \
-    php7-iconv \
-    php7-json \
-    php7-mbstring \
-    php7-mcrypt \
-    php7-mysqli \
-    php7-odbc \
-    php7-openssl \
-    php7-pdo \
-    php7-pdo_dblib \
-    php7-pdo_mysql \
-    php7-pdo_odbc \
-    php7-pdo_pgsql \
-    php7-pdo_sqlite \
-    php7-apache2 \
-    php7-session \
-    php7-soap \
-    php7-sqlite3 \
-    php7-tokenizer \
-    php7-xml \
-    php7-xmlreader \
-    php7-xmlrpc \
-    php7-xmlwriter \
-    php7-zip \
-    php7-zlib && \
-    sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
-    sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
-    sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini && \
-    sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|i" /etc/php7/php.ini && \
-    sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php7/php.ini && \
-    sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.ini && \
-    sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini
+    echo -e "\nInstalling PHP 7..." \
+    && apk add --update \
+        php7-bcmath \
+        php7-bz2 \
+        php7-ctype \
+        php7-curl \
+        php7-dom \
+        php7-fpm \
+        php7-gd \
+        php7-gettext \
+        php7-gmp \
+        php7-iconv \
+        php7-json \
+        php7-mbstring \
+        php7-mcrypt \
+        php7-mysqli \
+        php7-odbc \
+        php7-openssl \
+        php7-pdo \
+        php7-pdo_dblib \
+        php7-pdo_mysql \
+        php7-pdo_odbc \
+        php7-pdo_pgsql \
+        php7-pdo_sqlite \
+        php7-apache2 \
+        php7-session \
+        php7-soap \
+        php7-sqlite3 \
+        php7-tokenizer \
+        php7-xml \
+        php7-xmlreader \
+        php7-xmlrpc \
+        php7-xmlwriter \
+        php7-zip \
+        php7-zlib \
+    && sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf \
+    && sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini \
+    && sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini \
+    && sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|i" /etc/php7/php.ini \
+    && sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php7/php.ini \
+    && sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.ini \
+    && sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini
 
 # Apache2.
 RUN \
-    echo -e "\nInstalling Apache 2..." && \
-    apk add --update \
+    echo -e "\nInstalling Apache 2..." \
+    && apk add --update \
         apache2 \
-        apache2-ssl && \
-    mkdir -p /run/apache2 && \
-    mkdir -p /var/www/live && \
-    sed -i 's|^#ServerName.*|ServerName localhost|' /etc/apache2/httpd.conf && \
-    sed -i 's|#LoadModule rewrite_module modules/mod_rewrite.so|LoadModule rewrite_module modules/mod_rewrite.so|' /etc/apache2/httpd.conf && \
-    sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/httpd.conf && \
-    sed -i 's|/var/www/localhost/htdocs|/var/www/live|' /etc/apache2/httpd.conf
+        apache2-ssl \
+    && mkdir -p /run/apache2 \
+    && mkdir -p /var/www/live \
+    && sed -i 's|^#ServerName.*|ServerName localhost|' /etc/apache2/httpd.conf \
+    && sed -i 's|#LoadModule rewrite_module modules/mod_rewrite.so|LoadModule rewrite_module modules/mod_rewrite.so|' /etc/apache2/httpd.conf \
+    && sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/httpd.conf \
+    && sed -i 's|/var/www/localhost/htdocs|/var/www/live|' /etc/apache2/httpd.conf
 
 RUN \
     echo -e "\nInstalling misc packages..." && \
@@ -83,12 +83,17 @@ RUN \
         bash \
         vim
 
+# Logs should go to stdout / stderr.
+RUN set -ex \
+    && ln -sfT /dev/stderr "/var/www/logs/error.log" \
+    && ln -sfT /dev/stdout "/var/www/logs/access.log"
+
 # Clear cache.
 RUN \
-    echo -e "\nCleaning up temporary files..." && \
-    apk del tzdata && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
+    echo -e "\nCleaning up temporary files..." \
+    && apk del tzdata \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/*
 
 # Set work directory.
 WORKDIR /var/www
