@@ -1,6 +1,6 @@
 # Docker PHP / PHP + Apache
 
-This is a PHP docker image built on Alpine Line (http://www.alpinelinux.org/), a lightweight Linux distro.
+This is a PHP docker image built on Alpine Linux (http://www.alpinelinux.org/), a lightweight Linux distro.
 
 ## Prerequisites
 
