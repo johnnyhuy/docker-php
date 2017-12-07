@@ -30,7 +30,7 @@ You can use the following configuration to launch the image from docker-compose.
 
 Replace the square brackets with relevant information.
 
-***PHP 7**
+***PHP 7***
 
 ```
 version: "3.2"
@@ -44,7 +44,7 @@ services:
 ```
 
 
-***PHP 7 + Apache 2.4**
+***PHP 7 + Apache 2.4***
 
 ```
 version: "3.2"
