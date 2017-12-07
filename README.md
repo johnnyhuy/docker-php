@@ -30,11 +30,27 @@ You can use the following configuration to launch the image from docker-compose.
 
 Replace the square brackets with relevant information.
 
+***PHP 7**
+
 ```
 version: "3.2"
 services:
   [IMAGE_NAME]:
-    image: johnnyhuy/php:apache
+    image: johnnyhuy/php:7
+    volumes:
+      - [WEBSITE PATH]:/var/www/live
+    ports:
+      - 9000:9000
+```
+
+
+***PHP 7 + Apache 2.4**
+
+```
+version: "3.2"
+services:
+  [IMAGE_NAME]:
+    image: johnnyhuy/php:7-apache
     volumes:
       - [WEBSITE PATH]:/var/www/live
     ports:
