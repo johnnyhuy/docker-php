@@ -15,12 +15,13 @@ Grab the image from the Docker repository.
 
 ***PHP 7***
 
-```
+```shell
 docker pull johnnyhuy/php:7
 ```
 
 ***PHP 7 + Apache 2.4***
-```
+
+```shell
 docker pull johnnyhuy/php:7-apache
 ```
 
@@ -32,7 +33,7 @@ Replace the square brackets with relevant information.
 
 ***PHP 7***
 
-```
+```yml
 version: "3.2"
 services:
   [IMAGE_NAME]:
@@ -46,7 +47,7 @@ services:
 
 ***PHP 7 + Apache 2.4***
 
-```
+```yml
 version: "3.2"
 services:
   [IMAGE_NAME]:
