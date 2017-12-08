@@ -3,6 +3,6 @@ services:
   test_website:
     image: johnnyhuy/php:apache
     volumes:
-      - ./www:/var/www/live
+      - ./www:/var/www/localhost
     ports:
       - 80:80

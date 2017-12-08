@@ -39,7 +39,7 @@ services:
   [IMAGE_NAME]:
     image: johnnyhuy/php:7
     volumes:
-      - [WEBSITE PATH]:/var/www/live
+      - [WEBSITE PATH]:/var/www/localhost
     ports:
       - 9000:9000
 ```
@@ -53,7 +53,7 @@ services:
   [IMAGE_NAME]:
     image: johnnyhuy/php:7-apache
     volumes:
-      - [WEBSITE PATH]:/var/www/live
+      - [WEBSITE PATH]:/var/www/localhost
     ports:
       - 80:80
 ```
